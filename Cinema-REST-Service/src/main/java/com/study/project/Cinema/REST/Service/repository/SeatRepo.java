@@ -8,5 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface SeatRepo extends CrudRepository<SeatEntity, Long> {
-    Optional<SeatRepo> findByRowNumAndColumnNum(Integer row_num, Integer column_num);
+
+    Optional<SeatEntity> findByRowNumAndColumnNum(Integer row_num, Integer column_num);
+
 }

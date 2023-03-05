@@ -1,16 +1,21 @@
 package com.study.project.Cinema.REST.Service.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "seat")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class SeatEntity {
 
     @Id
@@ -18,16 +23,20 @@ public class SeatEntity {
     @JsonIgnore
     private Long id;
 
-    @Column(unique = true)
+    @JsonProperty(value = "row_num")
+    @Column(name = "row_num", nullable = false)
     private Integer rowNum;
 
-    @Column(unique = true)
+    @JsonProperty(value = "column_num")
+    @Column(name = "column_num", nullable = false)
     private Integer columnNum;
 
+    @Column
     private Integer price;
 
     @JsonIgnore
-    private Boolean isOrdered;
+    @Column(nullable = false)
+    private Boolean ordered;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "seat")
     private TicketEntity tickets;
@@ -36,4 +45,20 @@ public class SeatEntity {
     private void init() {
         price = rowNum < 4 ? 8 : 10;
     }
+
+    @JsonIgnore
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        SeatEntity that = (SeatEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @JsonIgnore
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
 }

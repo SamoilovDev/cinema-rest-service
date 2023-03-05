@@ -1,9 +1,10 @@
 package com.study.project.Cinema.REST.Service.controllers;
 
-import com.study.project.Cinema.REST.Service.CinemaHallModel.CinemaHall;
-import com.study.project.Cinema.REST.Service.CinemaHallService.CinemaHallService;
-import com.study.project.Cinema.REST.Service.Exceptions.*;
+import com.study.project.Cinema.REST.Service.model.CinemaHall;
+import com.study.project.Cinema.REST.Service.service.CinemaHallService;
+import com.study.project.Cinema.REST.Service.exceptions.*;
 import com.study.project.Cinema.REST.Service.entity.SeatEntity;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -11,25 +12,23 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@AllArgsConstructor
 @RestController
 public class CinemaController {
 
+    @Autowired
     private final CinemaHallService cinemaHallService;
 
+    @Autowired
     private final CinemaHall cinemaHall;
 
-    public CinemaController(@Autowired CinemaHallService cinemaHallService, CinemaHall cinemaHall) {
-        this.cinemaHallService = cinemaHallService;
-        this.cinemaHall = cinemaHall;
-    }
-
     @GetMapping("/seats")
-    public CinemaHall getFreeSeatsAtRoom() {
-        return cinemaHall;
+    public ResponseEntity<CinemaHall> getAllSeatsAtRoom() {
+        return ResponseEntity.ok(cinemaHall);
     }
 
     @PostMapping("/purchase")
-    public ResponseEntity<?> buyTicker(@RequestBody SeatEntity seatEntity)
+    public ResponseEntity<?> buyTicket(@RequestBody SeatEntity seatEntity)
             throws NumberOutOfBoundsException, HasBeenAlreadyPurchasedException {
 
         try {
@@ -70,4 +69,5 @@ public class CinemaController {
                     .body(Map.of("error", ex.getMessage()));
         }
     }
+
 }

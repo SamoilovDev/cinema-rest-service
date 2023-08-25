@@ -1,4 +1,4 @@
-package com.study.project.Cinema.REST.Service.controllers;
+package com.study.project.Cinema.REST.Service.controller;
 
 import com.study.project.Cinema.REST.Service.dto.CinemaHallDto;
 import com.study.project.Cinema.REST.Service.dto.CinemaStatsDto;

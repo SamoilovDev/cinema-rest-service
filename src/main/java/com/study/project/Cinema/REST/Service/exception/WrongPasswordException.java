@@ -1,4 +1,4 @@
-package com.study.project.Cinema.REST.Service.exceptions;
+package com.study.project.Cinema.REST.Service.exception;
 
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;

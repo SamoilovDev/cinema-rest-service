@@ -10,8 +10,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Builder
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ticket")
 public class TicketEntity {
 
@@ -19,10 +21,12 @@ public class TicketEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String token = UUID.randomUUID().toString();
+    @Builder.Default
+    @Column(name = "token")
+    private final String token = UUID.randomUUID().toString();
 
     @OneToOne
-    @JoinColumn(name = "seat_id")
+    @JoinColumn(name = "seat_id", referencedColumnName = "id")
     private SeatEntity seat;
 
     @Override

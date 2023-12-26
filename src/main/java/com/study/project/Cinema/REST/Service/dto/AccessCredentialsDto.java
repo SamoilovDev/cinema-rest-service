@@ -1,6 +1,5 @@
 package com.study.project.Cinema.REST.Service.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestDto {
+public class AccessCredentialsDto {
 
-    @JsonAlias({"token", "password"})
-    private String requestStringField;
+    private String token;
+
+    private String password;
 
 }

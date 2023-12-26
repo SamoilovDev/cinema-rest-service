@@ -1,7 +1,6 @@
 package com.study.project.Cinema.REST.Service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.study.project.Cinema.REST.Service.entity.SeatEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +20,6 @@ public class CinemaHallDto {
     @JsonProperty("rows_count")
     private int rowsCount;
 
-    private List<SeatEntity> seats;
+    private List<SeatDto> seats;
 
 }

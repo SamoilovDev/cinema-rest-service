@@ -25,13 +25,14 @@ public class SeatEntity {
     @Column(name = "column_num", nullable = false)
     private Integer columnNum;
 
-    @Column
+    @Column(name = "price")
     private Integer price = rowNum < 4 ? 8 : 10;
 
-    @Column(nullable = false)
-    private Boolean ordered;
+    @Column(name = "is_ordered")
+    private boolean ordered;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "seat")
+    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
     private TicketEntity ticket;
 
     @Override
